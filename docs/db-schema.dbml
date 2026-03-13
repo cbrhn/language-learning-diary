@@ -1,67 +1,58 @@
-Table user {
+Table users {
   id integer [primary key]
   username varchar
   created_at timestamp
 }
 
-
-
-Table media_item {
+Table media_items {
   id integer [primary key, not null]
-  media_type integer [ref: > media_type.id]
-  user_id integer [ref: > user.id] // or library id
   title varchar
   rating integer
   language varchar
   main_skill varchar // enum, reading vs listening
-  additional_skills integer [ref: < additional_skills.id]
   deleted boolean
   created_at timestamp
-}
-
-Table progress_table {
-  id integer [primary key]
-  media_id integer [ref: - media_item.id]
+  updated_at timestamp
+  media_type_id integer [ref: > types_of_media.id]
+  user_id integer [ref: > user.id] // or library id
+  // Progress definition
   metric_type varchar
-  progress_value integer
   max_value integer
+  // study method
+  has_subtitles boolean
+  has_audio boolean
+  has_visuals boolean
+  study_intensity varchar
 }
 
 Table additional_media_properties {
   id integer [primary key]
   media_item_id integer [ref: > media_item.id]
   //props jsonB -> discarded for now
-  key varchar
-  value varchar
+  property_key varchar
+  property_value varchar
 }
 
-Table additional_skills {
-  id integer [primary key]
-  has_audio boolean
-  has_subs boolean
-  has_visuals boolean
-  study_level varchar
-  }
-
-Table media_type {
+Table types_of_media {
   id integer [primary key]
   name varchar
-  global boolean
+  is_global boolean
+  user_id integer [ref: > user.id]
 }
 
-Table monthly_progress_summary {
+Table monthly_progress_summaries {
   id integer [primary key]
-  user_id integer [ref: > user.id] 
   media_item_id integer [ref: > media_item.id]
+  user_id integer [ref: > user.id] 
   month date
   progress_at_start integer
   progress_at_end integer
 }
 
-Table progress_update_log {
+Table progress_update_logs {
   id integer [primary key]
-  user_id integer [ref: > user.id] //?
   media_item_id integer [ref: > media_item.id]
+  user_id integer [ref: > user.id] //?
   updated_at timestamp
   progress_value integer
 }
