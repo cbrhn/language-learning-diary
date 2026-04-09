@@ -2,19 +2,18 @@ spring:
   application:
     name: langdiary
   datasource:
-    #url: jdbc:postgresql://localhost:5432/langdiary_db
+    url: jdbc:postgresql://localhost:5432/langdiary_db
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: validate
     database: PostgreSQL
+    #show-sql: true
   flyway:
     enabled: true
     validate-on-migrate: true
-    #url: jdbc:postgresql://localhost:5432/langdiary_db
-    username: ${FLYWAY_USERNAME}
+    url: jdbc:postgresql://localhost:5432/langdiary_db
+    user: ${FLYWAY_USERNAME}
     password: ${FLYWAY_PASSWORD}
-    locations:
-      - classpath:db/migration/core
-      - classpath:db/migration/dev
+    locations: classpath:db/migration/core,classpath:db/migration/dev
