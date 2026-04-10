@@ -71,9 +71,15 @@ CREATE TABLE users
 (
     id         INTEGER                     NOT NULL,
     username   VARCHAR(255),
+    email      VARCHAR(255)                NOT NULL,
+    password   VARCHAR(255)                NOT NULL,
+    role       VARCHAR(255),
     created_at TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     CONSTRAINT pk_users PRIMARY KEY (id)
 );
+
+ALTER TABLE users
+    ADD CONSTRAINT uc_users_email UNIQUE (email);
 
 CREATE INDEX idx_month ON monthly_progress_summaries (month);
 

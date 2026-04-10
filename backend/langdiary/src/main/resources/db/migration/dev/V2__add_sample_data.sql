@@ -2,8 +2,8 @@
 -- 1. Users
 -- Constraints: Exactly one user, username 'sample_user'
 -- ---------------------------------------------------------
-INSERT INTO users (id, username, created_at)
-VALUES (1, 'sample_user', CURRENT_TIMESTAMP);
+INSERT INTO users (id, username, email, password, role, created_at)
+VALUES (1, 'sample_user', 'abc123fff@sample_email.com', '$2a$10$2.g0MRT2jKJCWNfyl6mSZe5LwtKcJGNSU8SyJVot6P09LM9LVzgkm', 'user', CURRENT_TIMESTAMP);
 
 -- ---------------------------------------------------------
 -- 2. Types of Media

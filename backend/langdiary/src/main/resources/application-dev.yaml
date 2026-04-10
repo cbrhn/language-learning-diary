@@ -17,3 +17,7 @@ spring:
     user: ${FLYWAY_USERNAME}
     password: ${FLYWAY_PASSWORD}
     locations: classpath:db/migration/core,classpath:db/migration/dev
+  security:
+    user:
+      name: user
+      password: ${TMP_DEV_PW}
