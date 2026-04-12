@@ -41,6 +41,8 @@ public class MediaItem {
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
+    private LocalDateTime startedAt;
+
     @UpdateTimestamp
     @Column(nullable = false, updatable = true)
     private LocalDateTime updatedAt;
@@ -70,13 +72,13 @@ public class MediaItem {
     public MediaItem() {
     }
 
-    public MediaItem(String title, MainSkill mainSkill, TypeOfMedia typeOfMedia, User user) {
+    public MediaItem(String title, MainSkill mainSkill, TypeOfMedia typeOfMedia, User user, LocalDateTime startedAt) {
         this.title = title;
         this.mainSkill = mainSkill;
         this.typeOfMedia = typeOfMedia;
         this.user = user;
+        this.startedAt = startedAt;
     }
-
 
     @Override
     public final boolean equals(Object o) {

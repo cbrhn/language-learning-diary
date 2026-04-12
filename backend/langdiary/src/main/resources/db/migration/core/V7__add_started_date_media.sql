@@ -1,0 +1,2 @@
+ALTER TABLE media_items
+    ADD started_at TIMESTAMP WITHOUT TIME ZONE;
