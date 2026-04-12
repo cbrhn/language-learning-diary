@@ -1,21 +1,25 @@
 package app.langdiary.progress_tracking;
 
 import jakarta.persistence.Embeddable;
-import org.hibernate.proxy.HibernateProxy;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.util.Objects;
 
 @Embeddable
 public class ProgressDefinition {
 
-    private String metricType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "metric_type_id")
+    private TypeOfMetric metricType;
 
     private Integer maxValue;
 
     public ProgressDefinition() {
     }
 
-    public ProgressDefinition(String metricType, int maxValue) {
+    public ProgressDefinition(TypeOfMetric metricType, int maxValue) {
         this.metricType = metricType;
         this.maxValue = maxValue;
     }
@@ -37,16 +41,16 @@ public class ProgressDefinition {
     @Override
     public String toString() {
         return "ProgressDefinition{" +
-                "metricType='" + metricType + '\'' +
+                "metricType='" + metricType.getName() + '\'' +
                 ", maxValue=" + maxValue +
                 '}';
     }
 
-    public String getMetricType() {
+    public TypeOfMetric getMetricType() {
         return metricType;
     }
 
-    public void setMetricType(String metricType) {
+    public void setMetricType(TypeOfMetric metricType) {
         this.metricType = metricType;
     }
 

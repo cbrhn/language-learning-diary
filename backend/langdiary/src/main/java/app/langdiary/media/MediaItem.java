@@ -104,7 +104,7 @@ public class MediaItem {
                 ", updatedAt=" + updatedAt +
                 ", progressDefinition=" + progressDefinition +
                 ", studyMethod=" + studyMethod +
-                ", typeOfMedia=" + typeOfMedia +
+                ", typeOfMedia=" + typeOfMedia.getName() +
                 '}';
     }
 
