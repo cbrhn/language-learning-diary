@@ -25,7 +25,7 @@ public class StudyLogController {
         this.studyLogService = studyLogService;
     }
 
-    @GetMapping(value = "/api/{username}/report", params = {"startDate", "endDate"})
+    @GetMapping(value = "/api/{username}/report/media-list", params = {"startDate", "endDate"})
     @PreAuthorize("#username == authentication.name")
     public ResponseEntity<List<MediaInTimeframeResponseDTO>> getMediaByTimeframe (
             @PathVariable String username,
@@ -38,7 +38,7 @@ public class StudyLogController {
         return ResponseEntity.ok(studyLogService.getMediaInTimeframe(username, startDateTime, endDateTime));
     }
 
-    @GetMapping(value = "/api/{username}/report", params = {"startDate", "timeframe"})
+    @GetMapping(value = "/api/{username}/report/media-list", params = {"startDate", "timeframe"})
     @PreAuthorize("#username == authentication.name")
     public ResponseEntity<List<MediaInTimeframeResponseDTO>> getMediaForStudyLog (
             @PathVariable String username,
@@ -47,6 +47,15 @@ public class StudyLogController {
     ) {
 
         return ResponseEntity.ok(studyLogService.getMediaInTimeframe(username, startDate, timeframe));
+    }
+
+    @GetMapping(value="/api/{username}/report/metric-summary")
+    public ResponseEntity<List<MetricCounterResponseDTO>> getMetricSummaryForStudyLog (
+            @PathVariable String username,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam TimeFrame timeframe
+    ) {
+        return ResponseEntity.ok(studyLogService.getMetricSummaryFromTimeframe(username, startDate, timeframe));
     }
 
 }

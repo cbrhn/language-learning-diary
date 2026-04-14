@@ -17,13 +17,16 @@ import static app.langdiary.utils.DateTimeUtils.getChronoUnitForTimeFrame;
 @Service
 public class StudyLogService {
 
-    private ProgressUpdateLogRepository progressUpdateLogRepository;
-    private TimeFrameProgressSummaryRepository timeFrameProgressSummaryRepository;
+    private final ProgressUpdateLogRepository progressUpdateLogRepository;
+    private final TimeFrameProgressSummaryRepository timeFrameProgressSummaryRepository;
 
-    public StudyLogService(@Autowired ProgressUpdateLogRepository progressUpdateLogRepository, @Autowired TimeFrameProgressSummaryRepository timeFrameProgressSummaryRepository) {
+    public StudyLogService(@Autowired ProgressUpdateLogRepository progressUpdateLogRepository,
+                           @Autowired TimeFrameProgressSummaryRepository timeFrameProgressSummaryRepository) {
         this.progressUpdateLogRepository = progressUpdateLogRepository;
         this.timeFrameProgressSummaryRepository = timeFrameProgressSummaryRepository;
     }
+
+    /* Collection of media items in specific time frame */
 
     public List<MediaInTimeframeResponseDTO> getMediaInTimeframe(String username, LocalDateTime startDate, LocalDateTime endDate) {
         List<RawMediaProgressProjection> rawProgress = progressUpdateLogRepository.findRawProgressForMonth(username, startDate, endDate);
@@ -64,4 +67,11 @@ public class StudyLogService {
 
         return new MediaInTimeframeResponseDTO(raw.getTitle(), raw.getType(), raw.getMainSkill(), raw.getRating(), startPercent, endPercent, wasCompletedInTimeFrame);
     }
+
+    /* Metric summary within time frame */
+
+    public List<MetricCounterResponseDTO> getMetricSummaryFromTimeframe(String username, LocalDate startDate, TimeFrame timeframe) {
+        return timeFrameProgressSummaryRepository.getRawMetricInfo(username, startDate, timeframe);
+    }
+
 }
