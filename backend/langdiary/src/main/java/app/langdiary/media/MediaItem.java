@@ -10,6 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,12 @@ public class MediaItem {
     private Integer rating;
 
     private String language;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MediaStatus mediaStatus = MediaStatus.NOT_SET;
+
+    private LocalDate finishedDate;
 
     @Enumerated(EnumType.STRING)
     private MainSkill mainSkill;
@@ -140,6 +147,22 @@ public class MediaItem {
         this.language = language;
     }
 
+    public MediaStatus getMediaStatus() {
+        return mediaStatus;
+    }
+
+    public void setMediaStatus(MediaStatus mediaStatus) {
+        this.mediaStatus = mediaStatus;
+    }
+
+    public LocalDate getFinishedDate() {
+        return finishedDate;
+    }
+
+    public void setFinishedDate(LocalDate finishedDate) {
+        this.finishedDate = finishedDate;
+    }
+
     public MainSkill getMainSkill() {
         return mainSkill;
     }
@@ -203,4 +226,6 @@ public class MediaItem {
     public User getUser() {
         return user;
     }
+
+
 }

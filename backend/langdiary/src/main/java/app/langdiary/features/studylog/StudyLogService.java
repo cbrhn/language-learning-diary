@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static app.langdiary.utils.DateTimeUtils.getChronoUnitForTimeFrame;
 
 @Service
 public class StudyLogService {
@@ -25,16 +28,22 @@ public class StudyLogService {
     public List<MediaInTimeframeResponseDTO> getMediaInTimeframe(String username, LocalDateTime startDate, LocalDateTime endDate) {
         List<RawMediaProgressProjection> rawProgress = progressUpdateLogRepository.findRawProgressForMonth(username, startDate, endDate);
 
-        return rawProgress.stream().map(this::mapToMediaMonthDTO).collect(Collectors.toList());
+        LocalDate startBound = startDate.toLocalDate();
+        LocalDate endBound = endDate.toLocalDate();
+
+        return rawProgress.stream().map(raw -> mapToMediaMonthDTO(raw, startBound, endBound)).collect((Collectors.toList()));
     }
 
     public List<MediaInTimeframeResponseDTO> getMediaInTimeframe(String username, LocalDate startDate, TimeFrame timeframe) {
         List<RawMediaProgressProjection> rawProgress = timeFrameProgressSummaryRepository.findRawProgressForMonth(username, startDate, timeframe);
 
-        return rawProgress.stream().map(this::mapToMediaMonthDTO).collect(Collectors.toList());
+        ChronoUnit unitToAdd = getChronoUnitForTimeFrame(timeframe);
+        LocalDate endBound = startDate.plus(1, unitToAdd);
+
+        return rawProgress.stream().map(raw -> mapToMediaMonthDTO(raw, startDate, endBound)).collect((Collectors.toList()));
     }
 
-    private MediaInTimeframeResponseDTO mapToMediaMonthDTO(RawMediaProgressProjection raw) {
+    private MediaInTimeframeResponseDTO mapToMediaMonthDTO(RawMediaProgressProjection raw, LocalDate startBound, LocalDate endBound) {
         Integer startAbsolute = raw.getProgressAtStart();
         Integer endAbsolute = raw.getProgressAtEnd();
         Integer maxValue = raw.getMaxValue();
@@ -47,6 +56,12 @@ public class StudyLogService {
             endPercent = (int) Math.round(((float) endAbsolute / maxValue) * 100);
         }
 
-        return new MediaInTimeframeResponseDTO(raw.getTitle(), raw.getType(), raw.getMainSkill(), raw.getRating(), startPercent, endPercent);
+        boolean wasCompletedInTimeFrame = false;
+        LocalDate finishedDate = raw.getFinishedDate();
+        if (finishedDate != null) {
+            wasCompletedInTimeFrame = !finishedDate.isBefore(startBound) && !finishedDate.isAfter(endBound);
+        }
+
+        return new MediaInTimeframeResponseDTO(raw.getTitle(), raw.getType(), raw.getMainSkill(), raw.getRating(), startPercent, endPercent, wasCompletedInTimeFrame);
     }
 }

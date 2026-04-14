@@ -1,5 +1,7 @@
 package app.langdiary.features.studylog;
 
+import java.time.LocalDate;
+
 public interface RawMediaProgressProjection {
     Integer getMediaItemId();
     String getTitle();
@@ -9,4 +11,5 @@ public interface RawMediaProgressProjection {
     Integer getProgressAtEnd();
     Integer getMaxValue();
     Integer getRating();
+    LocalDate getFinishedDate();
 }

@@ -18,6 +18,7 @@ public interface ProgressUpdateLogRepository extends JpaRepository<ProgressUpdat
         tom.name AS type,
         m.progressDefinition.maxValue AS maxValue,
         m.rating AS rating,
+        m.finishedDate AS finishedDate,
         MIN(p.progressValue) AS progressAtStart,
         MAX(p.progressValue) AS progressAtEnd
     FROM ProgressUpdateLog p

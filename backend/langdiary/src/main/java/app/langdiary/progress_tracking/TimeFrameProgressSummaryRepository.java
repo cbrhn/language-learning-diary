@@ -19,6 +19,7 @@ public interface TimeFrameProgressSummaryRepository extends JpaRepository<TimeFr
         tom.name AS type,
         m.progressDefinition.maxValue AS maxValue,
         m.rating AS rating,
+        m.finishedDate AS finishedDate,
         s.progressAtStart AS progressAtStart,
         s.progressAtEnd AS progressAtEnd
     FROM TimeFrameProgressSummary s
