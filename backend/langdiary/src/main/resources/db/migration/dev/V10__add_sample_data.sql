@@ -5,7 +5,7 @@
 -- Constraints: Exactly one user, username 'sample_user'
 -- ---------------------------------------------------------
 INSERT INTO users (id, username, email, password, role, created_at)
-VALUES (1, 'sample_user', 'abc123fff@sample_email.com', '$2a$10$2.g0MRT2jKJCWNfyl6mSZe5LwtKcJGNSU8SyJVot6P09LM9LVzgkm', 'user', CURRENT_TIMESTAMP);
+VALUES (1, 'sample_user', 'abc123fff@sample_email.com', '$2a$10$2.g0MRT2jKJCWNfyl6mSZe5LwtKcJGNSU8SyJVot6P09LM9LVzgkm', 'USER', CURRENT_TIMESTAMP);
 
 
 -- ---------------------------------------------------------
@@ -32,36 +32,36 @@ INSERT INTO metric_types (id, name, is_global, user_id) VALUES
 
 -- ---------------------------------------------------------
 -- 4. Media Items
--- Constraints: Language always 'Japanese', main_skill is reading/listening
+-- Constraints: Language always 'Japanese', main_skill is READING/LISTENING
 -- metric_type_id links to the new metric_types table
 -- ---------------------------------------------------------
 INSERT INTO media_items (
     id, title, rating, language, main_skill, deleted, created_at, updated_at, 
     media_type_id, user_id, metric_type_id, max_value, has_subtitles, has_audio, has_visuals, study_intensity
 ) VALUES
--- Anime & Drama & Podcasts (Listening, Minutes -> ID 1)
-(1, 'Sen to Chihiro no Kamikakushi', 10, 'Japanese', 'listening', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 125, true, true, true, 'Medium'),
-(2, 'Shirokuma Cafe', 8, 'Japanese', 'listening', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 1200, false, true, true, 'Low'),
-(3, 'Nihongo Con Teppei', 9, 'Japanese', 'listening', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5, 1, 1, 5000, false, true, false, 'Low'),
-(4, 'Terrace House: Boys & Girls in the City', 7, 'Japanese', 'listening', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 6, 1, 1, 1380, true, true, true, 'High'),
-(5, 'Kimi no Na wa (Your Name)', 10, 'Japanese', 'listening', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 107, true, true, true, 'Medium'),
-(6, 'Jujutsu Kaisen Season 1', 9, 'Japanese', 'listening', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 576, true, true, true, 'Medium'),
-(7, 'Alice in Borderland Season 1', 8, 'Japanese', 'listening', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 6, 1, 1, 400, true, true, true, 'High'),
-(8, 'Death Note', 9, 'Japanese', 'listening', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 885, true, true, true, 'High'),
-(9, 'Let''s Learn Japanese from Small Talk', 8, 'Japanese', 'listening', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5, 1, 1, 1200, false, true, false, 'Low'),
+-- Anime & Drama & Podcasts (LISTENING, Minutes -> ID 1)
+(1, 'Sen to Chihiro no Kamikakushi', 10, 'Japanese', 'LISTENING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 125, true, true, true, 'Medium'),
+(2, 'Shirokuma Cafe', 8, 'Japanese', 'LISTENING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 1200, false, true, true, 'Low'),
+(3, 'Nihongo Con Teppei', 9, 'Japanese', 'LISTENING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5, 1, 1, 5000, false, true, false, 'Low'),
+(4, 'Terrace House: Boys & Girls in the City', 7, 'Japanese', 'LISTENING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 6, 1, 1, 1380, true, true, true, 'High'),
+(5, 'Kimi no Na wa (Your Name)', 10, 'Japanese', 'LISTENING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 107, true, true, true, 'Medium'),
+(6, 'Jujutsu Kaisen Season 1', 9, 'Japanese', 'LISTENING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 576, true, true, true, 'Medium'),
+(7, 'Alice in Borderland Season 1', 8, 'Japanese', 'LISTENING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 6, 1, 1, 400, true, true, true, 'High'),
+(8, 'Death Note', 9, 'Japanese', 'LISTENING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 1, 1, 1, 885, true, true, true, 'High'),
+(9, 'Let''s Learn Japanese from Small Talk', 8, 'Japanese', 'LISTENING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 5, 1, 1, 1200, false, true, false, 'Low'),
 
--- Manga & Light Novels (Reading, Pages -> ID 2)
-(10, 'Yotsuba&! Volume 1', 9, 'Japanese', 'reading', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 224, false, false, true, 'Low'),
-(11, 'Yotsuba&! Volume 2', 9, 'Japanese', 'reading', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 224, false, false, true, 'Low'),
-(12, 'Harry Potter to Kenja no Ishi', 8, 'Japanese', 'reading', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 4, 1, 2, 350, false, false, false, 'High'),
-(13, 'Bishoujo Senshi Sailor Moon Vol 1', 7, 'Japanese', 'reading', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 200, false, false, true, 'Medium'),
-(14, 'Kino no Tabi Volume 1', 9, 'Japanese', 'reading', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 4, 1, 2, 250, false, false, false, 'Medium'),
-(15, 'Shingeki no Kyojin Vol 1', 10, 'Japanese', 'reading', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 192, false, false, true, 'High'),
-(16, 'One Piece Vol 1', 10, 'Japanese', 'reading', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 216, false, false, true, 'Low'),
+-- Manga & Light Novels (READING, Pages -> ID 2)
+(10, 'Yotsuba&! Volume 1', 9, 'Japanese', 'READING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 224, false, false, true, 'Low'),
+(11, 'Yotsuba&! Volume 2', 9, 'Japanese', 'READING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 224, false, false, true, 'Low'),
+(12, 'Harry Potter to Kenja no Ishi', 8, 'Japanese', 'READING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 4, 1, 2, 350, false, false, false, 'High'),
+(13, 'Bishoujo Senshi Sailor Moon Vol 1', 7, 'Japanese', 'READING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 200, false, false, true, 'Medium'),
+(14, 'Kino no Tabi Volume 1', 9, 'Japanese', 'READING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 4, 1, 2, 250, false, false, false, 'Medium'),
+(15, 'Shingeki no Kyojin Vol 1', 10, 'Japanese', 'READING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 192, false, false, true, 'High'),
+(16, 'One Piece Vol 1', 10, 'Japanese', 'READING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 2, 1, 2, 216, false, false, true, 'Low'),
 
--- Visual Novels (Reading, Characters -> ID 3)
-(17, 'Steins;Gate', 10, 'Japanese', 'reading', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3, 1, 3, 800000, true, true, true, 'High'),
-(18, 'Clannad', 9, 'Japanese', 'reading', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3, 1, 3, 1200000, true, true, true, 'Medium');
+-- Visual Novels (READING, Characters -> ID 3)
+(17, 'Steins;Gate', 10, 'Japanese', 'READING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3, 1, 3, 800000, true, true, true, 'High'),
+(18, 'Clannad', 9, 'Japanese', 'READING', false, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 3, 1, 3, 1200000, true, true, true, 'Medium');
 
 -- ---------------------------------------------------------
 -- 5. Additional Media Properties
@@ -136,6 +136,27 @@ INSERT INTO monthly_progress_summaries (id, media_item_id, user_id, month, progr
 (16, 16, 1, DATE_TRUNC('month', CURRENT_DATE), 0, 216),
 (17, 17, 1, DATE_TRUNC('month', CURRENT_DATE), 0, 45000),
 (18, 18, 1, DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month'), 0, 100000);
+
+INSERT INTO time_frame_progress_summaries (id, media_item_id, user_id, starting_point, time_frame, progress_at_start, progress_at_end) VALUES
+(1, 1, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 125),
+(2, 2, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 150, 600),
+(3, 3, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 150),
+(4, 4, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 200),
+(5, 5, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 107),
+(6, 6, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 240),
+(7, 7, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 400),
+(8, 8, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 300),
+(9, 9, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 60),
+(10, 10, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 224),
+(11, 11, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 50),
+(12, 12, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 50, 150),
+(13, 13, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 200),
+(14, 14, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 120),
+(15, 15, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 192),
+(16, 16, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 216),
+(17, 17, 1, DATE_TRUNC('month', CURRENT_DATE), 'MONTH', 0, 45000),
+(18, 18, 1, DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month'), 'MONTH', 0, 100000);
+
 
 -- ---------------------------------------------------------
 -- 8. Sequence Alignment
