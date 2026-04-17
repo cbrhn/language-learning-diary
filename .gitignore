@@ -62,9 +62,11 @@ build/
 
 .env
 /backend/langdiary/.github
+
+# Template files
 frontend/language_diary/src/components/navigation/HeaderMegaMenu.tsx
 frontend/language_diary/src/components/navigation/HeaderMegaMenu.module.css
 frontend/language_diary/package-lock.json
 frontend/language_diary/public/icons.svg
 frontend/language_diary/README.md
-frontend/language_diary/src/assets/hero.png
+frontend/language_diary/src/stories/template_examples
