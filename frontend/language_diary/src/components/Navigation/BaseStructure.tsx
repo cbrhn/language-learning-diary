@@ -1,8 +1,9 @@
 import {AppShell, Flex} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import {NavbarNested} from "./NavbarNested.tsx";
+import {NavbarNested} from "./NavbarNested";
 import { Text } from '@mantine/core';
-import {MainContentContainer} from "./MainContentContainer.tsx";
+import {MainContentContainer} from "./MainContentContainer";
+import {ColorSchemeToggle} from "@/components/ColorSchemeToggle/ColorSchemeToggle";
 
 //import {HeaderMegaMenu} from "./HeaderMegaMenu.tsx";
 
@@ -22,9 +23,9 @@ export function BaseStructure() {
             /*footer={{ height: 30 }}*/
         >
 
-            <AppShell.Header c="red" withBorder={false}>
+            <AppShell.Header c="blue" withBorder={false}>
                 <Flex
-                    mih={50}
+                    mih={20}
                     //bg="rgba(0, 0, 0, .3)"
                     gap="md"
                     justify="flex-end"
@@ -33,7 +34,7 @@ export function BaseStructure() {
                     wrap="nowrap"
                     mr={5}
                 >
-                    <Text > Site is under construction! </Text>
+                    <Text> Site is under construction! </Text>
                 </Flex>
 
 
